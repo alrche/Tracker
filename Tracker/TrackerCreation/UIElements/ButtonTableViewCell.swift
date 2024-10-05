@@ -9,12 +9,10 @@ import UIKit
 
 final class ButtonTableViewCell: UITableViewCell {
 
-    // MARK: - Public Properties
     static let identifier = "ButtonTableViewCell"
 
     let titleLabel = UILabel()
 
-    // MARK: - Private Properties
     private let subtitleLabel = UILabel()
     private let stackView = UIStackView()
 

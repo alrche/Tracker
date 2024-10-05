@@ -22,7 +22,7 @@ private enum Sections: Int, CaseIterable {
     case color
 }
 
-class CreationTrackerViewController: UIViewController {
+final class CreationTrackerViewController: UIViewController {
 
     weak var creationDelegate: CreationTrackerDelegate?
     weak var configureUIDelegate: ConfigureUIForTrackerCreationProtocol?

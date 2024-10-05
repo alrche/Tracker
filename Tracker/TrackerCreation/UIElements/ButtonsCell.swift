@@ -7,8 +7,6 @@
 
 import UIKit
 
-// MARK: - Types
-
 private enum Sections: Int, CaseIterable {
     case category = 0
     case schedule
