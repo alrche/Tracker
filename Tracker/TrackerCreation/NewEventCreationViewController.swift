@@ -30,8 +30,7 @@ final class NewEventCreationViewController: CreationTrackerViewController {
             name: name,
             color: color,
             emoji: emoji,
-            schedule: weekSet,
-            state: .Event
+            schedule: weekSet
         )
 
         creationDelegate?.createTracker(tracker: tracker, category: trackerCategory)
@@ -43,7 +42,7 @@ final class NewEventCreationViewController: CreationTrackerViewController {
 extension NewEventCreationViewController: ConfigureUIForTrackerCreationProtocol {
     func configureButtonsCell(cell: ButtonsCell) {
         cell.prepareForReuse()
-        cell.state = .Event
+        cell.state = .event
     }
 
     func setupBackground() {

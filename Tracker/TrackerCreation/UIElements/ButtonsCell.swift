@@ -69,7 +69,7 @@ final class ButtonsCell: UICollectionViewCell, UITableViewDataSource, UITableVie
         cell.prepareForReuse()
 
         guard let state = state else { return }
-        if state == .Habit {
+        if state == .habit {
             switch indexPath.row {
             case Sections.category.rawValue:
                 cell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -95,7 +95,7 @@ final class ButtonsCell: UICollectionViewCell, UITableViewDataSource, UITableVie
 //MARK: Delegate
 extension ButtonsCell {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if state == .Habit {
+        if state == .habit {
             return 2
         } else {
             return 1

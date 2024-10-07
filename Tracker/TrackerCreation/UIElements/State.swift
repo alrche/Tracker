@@ -8,6 +8,6 @@
 import Foundation
 
 enum State {
-    case Habit
-    case Event
+    case habit
+    case event
 }

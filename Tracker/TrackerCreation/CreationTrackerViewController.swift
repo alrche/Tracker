@@ -128,8 +128,7 @@ class CreationTrackerViewController: UIViewController {
             name: name,
             color: color,
             emoji: emoji,
-            schedule: selectedWeekDays,
-            state: .Habit
+            schedule: selectedWeekDays
         )
 
         creationDelegate?.createTracker(tracker: tracker, category: trackerCategory)

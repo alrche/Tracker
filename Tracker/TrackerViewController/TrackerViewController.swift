@@ -196,8 +196,7 @@ extension TrackerViewController: UICollectionViewDataSource {
             color: tracker.color,
             emoji: tracker.emoji,
             daysCount: calculateTimesTrackerWasCompleted(id: tracker.id),
-            currentDay: currentDate,
-            state: tracker.state
+            currentDay: currentDate
         )
         return cell
     }

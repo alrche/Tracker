@@ -17,8 +17,8 @@ final class NameTrackerCell: UICollectionViewCell {
 
     weak var delegate: SaveNameTrackerDelegate?
 
-    let trackerNameTextField = UITextField()
-    let xButton = UIButton(type: .custom)
+    private let trackerNameTextField = UITextField()
+    private let xButton = UIButton(type: .custom)
 
     // MARK: - Initializers
     override init(frame: CGRect) {
