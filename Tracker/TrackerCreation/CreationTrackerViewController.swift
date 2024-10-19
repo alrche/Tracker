@@ -33,13 +33,9 @@ class CreationTrackerViewController: UIViewController {
         }
     }
 
-    var trackerCategory = "Здоровье" {
+    var trackerCategory = "Важное или не очень" {
         didSet {
-            if !trackerCategory.isEmpty {
-                configureUIDelegate?.checkIfSaveButtonCanBePressed()
-            } else {
-                assertionFailure("Категория не может быть пустой")
-            }
+            configureUIDelegate?.checkIfSaveButtonCanBePressed()
         }
     }
 
@@ -385,6 +381,6 @@ extension CreationTrackerViewController: SaveNameTrackerDelegate {
 //MARK: - ShowCategoriesDelegate
 extension CreationTrackerViewController: ShowCategoriesDelegate {
     func showCategoriesViewController() {
-        //TODO:
+        //TODO: добавить создание категорий
     }
 }
