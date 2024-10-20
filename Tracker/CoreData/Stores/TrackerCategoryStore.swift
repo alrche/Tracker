@@ -35,9 +35,6 @@ final class TrackerCategoryStore: NSObject {
     private var deletedIndexes: IndexSet?
     private var updatedIndexes: IndexSet?
     
-    private let scheduleConverter = ScheduleConverter()
-    private let colorConvertor = UIColorMarshalling()
-    
     private lazy var fetchedResultsController: NSFetchedResultsController<TrackerCategoryCoreData> = {
         let fetchRequest = TrackerCategoryCoreData.fetchRequest()
         
@@ -116,8 +113,8 @@ final class TrackerCategoryStore: NSObject {
                 let emoji = trackerData.emoji,
                 let colorString = trackerData.color
             {
-                let color = colorConvertor.color(from: colorString)
-                let schedule = scheduleConverter.getSchedule(from: trackerData.schedule)
+                let color = UIColorMarshalling.color(from: colorString)
+                let schedule = ScheduleConverter.getSchedule(from: trackerData.schedule)
                 let tracker = Tracker(
                     id: id,
                     name: name,

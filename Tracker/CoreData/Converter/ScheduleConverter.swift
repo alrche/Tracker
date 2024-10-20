@@ -8,8 +8,8 @@
 import Foundation
 
 final class ScheduleConverter {
-    func getSchedule(from byte: Int16) -> Set<WeekDays> {
-        let arrayOfBits = convertFromUInt16(from: byte)
+    static func getSchedule(from byte: Int16) -> Set<WeekDays> {
+        let arrayOfBits = ScheduleConverter().convertFromUInt16(from: byte)
         var weekdays: Set<WeekDays> = []
         for (index, bit) in arrayOfBits.enumerated() {
             if bit == 1 {
@@ -20,7 +20,7 @@ final class ScheduleConverter {
         return weekdays
     }
 
-    func convertScheduleToUInt16(from weekdays: Set<WeekDays>) -> Int16 {
+    static func convertScheduleToUInt16(from weekdays: Set<WeekDays>) -> Int16 {
         var byte: Int16 = 0
         for day in weekdays {
             let dayByte: Int16 = 1 << day.rawValue

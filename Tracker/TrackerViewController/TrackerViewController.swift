@@ -264,20 +264,11 @@ extension TrackerViewController: UICollectionViewDelegateFlowLayout {
 //MARK: TrackerCounterDelegate
 extension TrackerViewController: TrackerCounterDelegate {
     func increaseTrackerCounter(id: UUID, date: Date) {
-        completedTrackers.append(TrackerRecord(id: id, date: date))
+        try? trackerRecordStore.addRecord(trackerId: id, date: date)
     }
 
     func decreaseTrackerCounter(id: UUID, date: Date) {
-        completedTrackers = completedTrackers.filter {
-            if $0.id == id && Calendar.current.isDate(
-                $0.date,
-                equalTo: currentDate,
-                toGranularity: .day
-            ) {
-                return false
-            }
-            return true
-        }
+        try? trackerRecordStore.deleteRecord(trackerId: id, date: date)
     }
 
     func checkIfTrackerWasCompletedAtCurrentDay(id: UUID, date: Date) -> Bool {

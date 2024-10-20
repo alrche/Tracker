@@ -20,9 +20,6 @@ final class TrackerStore: NSObject {
     private var insertedIndexes: [IndexPath]?
     private var deletedIndexes: IndexSet?
 
-    private let uiColorMarshalling = UIColorMarshalling()
-    private let scheduleConverter = ScheduleConverter()
-
     private lazy var fetchedResultsController: NSFetchedResultsController<TrackerCoreData> = {
         let fetchRequest = TrackerCoreData.fetchRequest()
         fetchRequest.sortDescriptors = [
@@ -75,9 +72,9 @@ final class TrackerStore: NSObject {
 
         trackerCoreData.trackerId = tracker.id
         trackerCoreData.title = tracker.name
-        trackerCoreData.color = uiColorMarshalling.hexString(from: tracker.color)
+        trackerCoreData.color = UIColorMarshalling.hexString(from: tracker.color)
         trackerCoreData.emoji = tracker.emoji
-        trackerCoreData.schedule = scheduleConverter.convertScheduleToUInt16(from: tracker.schedule)
+        trackerCoreData.schedule = ScheduleConverter.convertScheduleToUInt16(from: tracker.schedule)
 
         if context.hasChanges {
             try context.save()
