@@ -40,7 +40,6 @@
 		401A3CC62CB1510600B55C0F /* NewEventCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401A3CC52CB1510600B55C0F /* NewEventCreationViewController.swift */; };
 		401A3CC82CB1512A00B55C0F /* NewHabitCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401A3CC72CB1512A00B55C0F /* NewHabitCreationViewController.swift */; };
 		401A3CCA2CB1514400B55C0F /* NewTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401A3CC92CB1514400B55C0F /* NewTrackerViewController.swift */; };
-		40BBA1452CC3A2510083CF96 /* Tracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40BBA1432CC3A2510083CF96 /* Tracker.xcdatamodeld */; };
 		40BBA14D2CC3A8910083CF96 /* TrackerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BBA14C2CC3A8910083CF96 /* TrackerStore.swift */; };
 		40BBA14F2CC3A8B40083CF96 /* TrackerCategoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BBA14E2CC3A8B40083CF96 /* TrackerCategoryStore.swift */; };
 		40BBA1512CC3A8C20083CF96 /* TrackerRecordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BBA1502CC3A8C20083CF96 /* TrackerRecordStore.swift */; };
@@ -50,6 +49,7 @@
 		40BBA15C2CC3AA400083CF96 /* TrackerStoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BBA15B2CC3AA400083CF96 /* TrackerStoreError.swift */; };
 		40BBA15E2CC3AA5D0083CF96 /* TrackerCategoryStoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BBA15D2CC3AA5D0083CF96 /* TrackerCategoryStoreError.swift */; };
 		40BBA1602CC3AA6B0083CF96 /* TrackerRecordStoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BBA15F2CC3AA6B0083CF96 /* TrackerRecordStoreError.swift */; };
+		40BBA1632CC518530083CF96 /* Tracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40BBA1612CC518530083CF96 /* Tracker.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,7 +88,6 @@
 		401A3CC52CB1510600B55C0F /* NewEventCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventCreationViewController.swift; sourceTree = "<group>"; };
 		401A3CC72CB1512A00B55C0F /* NewHabitCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHabitCreationViewController.swift; sourceTree = "<group>"; };
 		401A3CC92CB1514400B55C0F /* NewTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTrackerViewController.swift; sourceTree = "<group>"; };
-		40BBA1442CC3A2510083CF96 /* Tracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tracker.xcdatamodel; sourceTree = "<group>"; };
 		40BBA14C2CC3A8910083CF96 /* TrackerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerStore.swift; sourceTree = "<group>"; };
 		40BBA14E2CC3A8B40083CF96 /* TrackerCategoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerCategoryStore.swift; sourceTree = "<group>"; };
 		40BBA1502CC3A8C20083CF96 /* TrackerRecordStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerRecordStore.swift; sourceTree = "<group>"; };
@@ -98,6 +97,7 @@
 		40BBA15B2CC3AA400083CF96 /* TrackerStoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerStoreError.swift; sourceTree = "<group>"; };
 		40BBA15D2CC3AA5D0083CF96 /* TrackerCategoryStoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerCategoryStoreError.swift; sourceTree = "<group>"; };
 		40BBA15F2CC3AA6B0083CF96 /* TrackerRecordStoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerRecordStoreError.swift; sourceTree = "<group>"; };
+		40BBA1622CC518530083CF96 /* Tracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tracker.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,8 +244,8 @@
 		40BBA1422CC3A1F80083CF96 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				40BBA1612CC518530083CF96 /* Tracker.xcdatamodeld */,
 				40BBA1522CC3A9740083CF96 /* Converter */,
-				40BBA1432CC3A2510083CF96 /* Tracker.xcdatamodeld */,
 				40BBA1592CC3AA1B0083CF96 /* Stores */,
 			);
 			path = CoreData;
@@ -364,6 +364,7 @@
 				401A3C9A2CB14D4A00B55C0F /* TrackerCounterDelegate.swift in Sources */,
 				401A3CA52CB14E0A00B55C0F /* TrackerInfoCell.swift in Sources */,
 				40BBA15E2CC3AA5D0083CF96 /* TrackerCategoryStoreError.swift in Sources */,
+				40BBA1632CC518530083CF96 /* Tracker.xcdatamodeld in Sources */,
 				401A3CBC2CB1503C00B55C0F /* EmojiCell.swift in Sources */,
 				401A3CA72CB14E1F00B55C0F /* TrackerRecord.swift in Sources */,
 				401A3CA92CB14E3B00B55C0F /* WeekDays.swift in Sources */,
@@ -383,7 +384,6 @@
 				401A3B132CB131BE00B55C0F /* SceneDelegate.swift in Sources */,
 				401A3C9C2CB14D7300B55C0F /* TrackerCollectionViewCell.swift in Sources */,
 				40BBA15C2CC3AA400083CF96 /* TrackerStoreError.swift in Sources */,
-				40BBA1452CC3A2510083CF96 /* Tracker.xcdatamodeld in Sources */,
 				401A3C982CB14A3800B55C0F /* PlaceHolderView.swift in Sources */,
 				401A3CB82CB14FFE00B55C0F /* ButtonsCell.swift in Sources */,
 				401A3CBE2CB1505800B55C0F /* NameTrackerCell.swift in Sources */,
@@ -615,12 +615,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		40BBA1432CC3A2510083CF96 /* Tracker.xcdatamodeld */ = {
+		40BBA1612CC518530083CF96 /* Tracker.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				40BBA1442CC3A2510083CF96 /* Tracker.xcdatamodel */,
+				40BBA1622CC518530083CF96 /* Tracker.xcdatamodel */,
 			);
-			currentVersion = 40BBA1442CC3A2510083CF96 /* Tracker.xcdatamodel */;
+			currentVersion = 40BBA1622CC518530083CF96 /* Tracker.xcdatamodel */;
 			name = Tracker.xcdatamodeld;
 			path = "/Users/al-charnyshou/GitHub/Tracker/Tracker/CoreData/Tracker.xcdatamodeld";
 			sourceTree = "<group>";
