@@ -52,7 +52,6 @@ final class TrackerCollectionViewCell: UICollectionViewCell {
         setupCircle()
 
         setupEmojiLabel()
-        setupPinImageView()
         setupTitle()
         setupAddButton()
         setupDaysCountLabel()

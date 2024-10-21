@@ -15,6 +15,7 @@ final class ColorCell: UICollectionViewCell {
 
     override var isSelected: Bool {
         didSet {
+            self.layer.cornerRadius = 8
             self.layer.borderWidth = self.isSelected ? 3 : 0
             self.layer.borderColor = self.isSelected ? colorView.backgroundColor?.withAlphaComponent(0.3).cgColor : UIColor.clear.cgColor
         }
@@ -39,8 +40,8 @@ final class ColorCell: UICollectionViewCell {
         contentView.addSubview(colorView)
 
         NSLayoutConstraint.activate([
-            colorView.widthAnchor.constraint(equalToConstant: 40),
-            colorView.heightAnchor.constraint(equalToConstant: 40),
+            colorView.widthAnchor.constraint(equalToConstant: 46),
+            colorView.heightAnchor.constraint(equalToConstant: 46),
             colorView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             colorView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
