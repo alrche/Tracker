@@ -30,7 +30,7 @@ final class CategoryCell: UITableViewCell, ViewConfigurable {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        backgroundColor = .trackerGray
+        backgroundColor = .trackerBackground
         separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         layer.maskedCorners = []
 

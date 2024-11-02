@@ -32,7 +32,7 @@ final class CategoryCreationViewController: UIViewController, ViewConfigurable {
     private lazy var categoryNameTextField: UITextField = {
         let textField = UITextField()
         textField.layer.cornerRadius = 16
-        textField.backgroundColor = .trackerGray
+        textField.backgroundColor = .trackerBackground
         textField.placeholder = "Введите название категории"
         textField.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         textField.setLeftPaddingPoints(12)

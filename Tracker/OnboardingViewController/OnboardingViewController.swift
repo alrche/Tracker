@@ -69,7 +69,7 @@ final class OnboardingViewController: UIPageViewController, ViewConfigurable {
     
     func addConstraints() {
         NSLayoutConstraint.activate([
-            onboardingButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
+            onboardingButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -60),
             onboardingButton.heightAnchor.constraint(equalToConstant: 60),
             onboardingButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             onboardingButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),

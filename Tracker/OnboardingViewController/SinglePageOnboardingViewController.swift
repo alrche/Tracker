@@ -58,9 +58,9 @@ final class SinglePageOnboardingViewController: UIViewController, ViewConfigurab
             onboardingImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             onboardingImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
-            onboardingTextLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            onboardingTextLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 60),
             onboardingTextLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            view.trailingAnchor.constraint(equalTo: onboardingTextLabel.trailingAnchor,constant: 16)
+            onboardingTextLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
         ])
     }
 
