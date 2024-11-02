@@ -46,6 +46,27 @@ final class PlaceHolderView: UIView {
         label.textAlignment = .center
     }
 
+    func setUpNoCategories() {
+        let image = UIImage(named: "tracker_placeholder")
+        imageView.image = image
+
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 18 - UIFont.systemFont(ofSize: 12, weight: .medium).lineHeight
+
+        let attributedText = NSAttributedString(
+            string: "Привычки и события можно \n объединить по смыслу",
+            attributes: [
+                .font: UIFont.systemFont(ofSize: 12, weight: .medium),
+                .paragraphStyle: paragraphStyle
+            ]
+        )
+
+        label.attributedText = attributedText
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
+        label.textAlignment = .center
+    }
+
     // MARK: - Private Methods
     private func setupView() {
         imageView.translatesAutoresizingMaskIntoConstraints = false

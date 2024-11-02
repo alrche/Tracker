@@ -11,11 +11,16 @@ final class EmojiCell: UICollectionViewCell {
 
     static let identifier = "EmojiCell"
 
-    let label = UILabel()
+    lazy var emojiLabel: UILabel = {
+        let lable = UILabel()
+        lable.font = UIFont.systemFont(ofSize: 32, weight: .bold)
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        return lable
+    }()
 
     override var isSelected: Bool {
         didSet {
-            self.backgroundColor = self.isSelected ? .trackerLightGrey : .clear
+            updateBorder()
         }
     }
 
@@ -23,23 +28,33 @@ final class EmojiCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.layer.cornerRadius = 16
-        setupLabel()
+        configureView()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - Private Methods
-    private func setupLabel() {
-        label.font = UIFont.systemFont(ofSize: 32, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(label)
+    // MARK: - ViewConfigurable Methods
+        func addSubviews() {
+           contentView.addSubview(emojiLabel)
+       }
 
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
-        ])
+        func addConstraints() {
+           NSLayoutConstraint.activate([
+               emojiLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+               emojiLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+           ])
+       }
+
+    func configureView() {
+        addSubviews()
+        addConstraints()
+    }
+
+    // MARK: - Private Methods
+    private func updateBorder() {
+        self.backgroundColor = self.isSelected ? .trackerLightGrey : .clear
+        self.layer.cornerRadius = 16
     }
 }

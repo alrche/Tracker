@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ButtonTableViewCell: UITableViewCell {
+final class ButtonTableViewCell: UITableViewCell, ViewConfigurable {
 
     static let identifier = "ButtonTableViewCell"
 
@@ -20,57 +20,69 @@ final class ButtonTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        backgroundColor = .trackerBackground
-        accessoryType = .disclosureIndicator
-        layer.masksToBounds = true
-        layer.cornerRadius = 16
-
-        setupTitleLabel()
+        configureView()
+        configureCell()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - ViewConfigurable Methods
+    func addSubviews() {
+        contentView.addSubview(stackView)
+    }
+
+    func addConstraints() {
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -41),
+            stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+        ])
+    }
+
     // MARK: - Public Methods
     func setupSubtitleLabel(text: String) {
         if text.count > 0 {
-            subtitleLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
             subtitleLabel.text = text
             subtitleLabel.textColor = .trackerGray
-            subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
             stackView.addArrangedSubview(subtitleLabel)
-
-            NSLayoutConstraint.activate([
-                subtitleLabel.heightAnchor.constraint(equalToConstant: 22)
-            ])
         } else {
             subtitleLabel.text = ""
             stackView.removeArrangedSubview(subtitleLabel)
         }
     }
 
+    func configureView() {
+        addSubviews()
+        addConstraints()
+    }
+
     // MARK: - Private Methods
+    private func configureCell() {
+        backgroundColor = .trackerBackground
+        accessoryType = .disclosureIndicator
+        layer.masksToBounds = true
+        layer.cornerRadius = 16
+
+        setupStackView()
+        setupTitleLabel()
+//        setupSubtitleLabel(text: "pupa")
+    }
+
+    private func setupStackView() {
+        stackView.axis = .vertical
+        stackView.spacing = 2
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+    }
+
     private func setupTitleLabel() {
         titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             titleLabel.heightAnchor.constraint(equalToConstant: 22)
-        ])
-
-        stackView.axis = NSLayoutConstraint.Axis.vertical
-        stackView.spacing = 2
-        stackView.addArrangedSubview(titleLabel)
-        stackView.distribution = UIStackView.Distribution.fillEqually
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-
-        contentView.addSubview(stackView)
-
-        NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -41),
-            stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
         ])
     }
 }

@@ -11,20 +11,33 @@ protocol SaveNameTrackerDelegate: AnyObject {
     func textFieldWasChanged(text: String)
 }
 
-final class NameTrackerCell: UICollectionViewCell {
+final class NameTrackerCell: UICollectionViewCell, ViewConfigurable {
 
     static let identifier = "TrackerNameTextFieldCell"
 
     weak var delegate: SaveNameTrackerDelegate?
 
-    private let trackerNameTextField = UITextField()
+    private lazy var trackerNameTextField: UITextField = {
+        let textField = UITextField()
+        textField.layer.cornerRadius = 16
+        textField.backgroundColor = .trackerBackground
+        textField.placeholder = "Введите название трекера"
+        textField.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        textField.setLeftPaddingPoints(12)
+        textField.clearButtonMode = .whileEditing
+        textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+
     private let xButton = UIButton(type: .custom)
 
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        setupTrackerNameTextField()
+        configureView()
+        setupHideKeyboardGesture()
     }
 
     required init?(coder: NSCoder) {
@@ -38,24 +51,32 @@ final class NameTrackerCell: UICollectionViewCell {
         delegate?.textFieldWasChanged(text: text)
     }
 
-    // MARK: - Private Methods
-    private func setupTrackerNameTextField() {
-        trackerNameTextField.layer.cornerRadius = 16
-        trackerNameTextField.backgroundColor = .trackerBackground
-        trackerNameTextField.placeholder = "Введите название трекера"
-        trackerNameTextField.font = UIFont.systemFont(ofSize: 17, weight: .regular)
-        trackerNameTextField.setLeftPaddingPoints(12)
-
-        trackerNameTextField.clearButtonMode = .whileEditing
-        trackerNameTextField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingDidEnd)
-        trackerNameTextField.translatesAutoresizingMaskIntoConstraints = false
+    // MARK: - ViewConfigurable Methods
+    func addSubviews() {
         contentView.addSubview(trackerNameTextField)
+    }
 
+    func addConstraints() {
         NSLayoutConstraint.activate([
             trackerNameTextField.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
             trackerNameTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             trackerNameTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             trackerNameTextField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
+    }
+
+    func configureView() {
+        addSubviews()
+        addConstraints()
+    }
+
+    // MARK: - Private Methods
+    private func setupHideKeyboardGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        contentView.addGestureRecognizer(tapGesture)
+    }
+
+    @objc private func hideKeyboard() {
+        contentView.endEditing(true)
     }
 }
