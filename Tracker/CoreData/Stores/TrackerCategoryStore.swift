@@ -75,7 +75,7 @@ final class TrackerCategoryStore: NSObject {
         request.predicate = NSPredicate(format: "%K == %@", #keyPath(TrackerCategoryCoreData.title), name)
         let count = try context.count(for: request)
         
-        if count == 0 {
+        if count == 0 && !name.isEmpty {
             let categoryCoreData = TrackerCategoryCoreData(context: context)
             categoryCoreData.title = name
             categoryCoreData.trackers = NSSet()

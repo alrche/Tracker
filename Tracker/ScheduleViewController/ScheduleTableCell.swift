@@ -19,6 +19,7 @@ final class ScheduleTableCell: UITableViewCell {
 
         backgroundColor = .trackerBackground
         setupSwitch()
+        self.selectionStyle = .none
     }
 
     required init?(coder: NSCoder) {

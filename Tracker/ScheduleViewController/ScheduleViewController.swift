@@ -20,24 +20,60 @@ private enum Constants {
     static let numberOfRowsInSection: Int = 7
 }
 
-final class ScheduleViewController: UIViewController {
+final class ScheduleViewController: UIViewController, ViewConfigurable {
 
     weak var sheduleDelegate: ScheduleProtocol?
     var selectedDays: Set<WeekDays> = []
 
-    private var tableView = UITableView()
-    private let saveButton = UIButton()
+    private lazy var scheduleTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(ScheduleTableCell.self, forCellReuseIdentifier: ScheduleTableCell.identifier)
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        tableView.tableHeaderView = UIView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+    private lazy var saveButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Готово", for: .normal)
+        button.backgroundColor = .trackerBlack
+        button.layer.cornerRadius = 16
+        button.addTarget(self, action: #selector(didTapSaveButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
 
     // MARK: - Public Methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        scheduleTableView.delegate = self
+        scheduleTableView.dataSource = self
+        configureView()
+
         self.title = "Расписание"
         navigationItem.hidesBackButton = true
         view.backgroundColor = .trackerWhite
+    }
 
-        setupSaveButton()
-        setupTableView()
+    // MARK: - ViewConfigurable Methods
+    func addSubviews() {
+        let subViews = [scheduleTableView, saveButton]
+        subViews.forEach { view.addSubview($0) }
+    }
+
+    func addConstraints() {
+        NSLayoutConstraint.activate([
+            scheduleTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            scheduleTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            scheduleTableView.heightAnchor.constraint(equalToConstant: 525),
+            scheduleTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+
+            saveButton.heightAnchor.constraint(equalToConstant: 60),
+            saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16)
+        ])
     }
 
     // MARK: - IBAction
@@ -59,40 +95,6 @@ final class ScheduleViewController: UIViewController {
     }
 
     // MARK: - Private Methods
-    private func setupSaveButton() {
-        saveButton.setTitle("Готово", for: .normal)
-        saveButton.backgroundColor = .trackerBlack
-        saveButton.layer.cornerRadius = 16
-        saveButton.addTarget(self, action: #selector(didTapSaveButton), for: .touchUpInside)
-        saveButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(saveButton)
-
-        NSLayoutConstraint.activate([
-            saveButton.heightAnchor.constraint(equalToConstant: 60),
-            saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16)
-        ])
-    }
-
-    private func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-
-        tableView.register(ScheduleTableCell.self, forCellReuseIdentifier: ScheduleTableCell.identifier)
-        tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        tableView.tableHeaderView = UIView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(tableView)
-
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            tableView.heightAnchor.constraint(equalToConstant: 525),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
-        ])
-    }
-
     private func configureCell(cell: ScheduleTableCell, cellForRowAt indexPath: IndexPath) {
         guard let weekDay = WeekDays(rawValue: indexPath.row + 1) else { return }
         cell.textLabel?.text = weekDay.name
@@ -103,7 +105,7 @@ final class ScheduleViewController: UIViewController {
         let firstCell = indexPath.row == Constants.numberOfRowsInSection - 7
 
         if lastCell {
-            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: tableView.bounds.width)
+            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: scheduleTableView.bounds.width)
             cell.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
             cell.layer.cornerRadius = 16
         } else if firstCell {

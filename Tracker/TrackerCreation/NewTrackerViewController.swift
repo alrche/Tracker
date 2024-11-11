@@ -15,25 +15,50 @@ struct NewTrackerViewControllerPreview: PreviewProvider {
     }
 }
 
-final class NewTrackerViewController: UIViewController {
+final class NewTrackerViewController: UIViewController, ViewConfigurable {
     weak var delegate: CreationTrackerDelegate?
 
-    private var newHabitButton = UIButton()
-    private var newEventButton = UIButton()
+    private lazy var newHabitButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Привычка", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        button.titleLabel?.textColor = .trackerWhite
+        button.backgroundColor = .trackerBlack
+        button.layer.cornerRadius = 16
+        button.addTarget(self, action: #selector(newHabitPressed), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
+    private lazy var newEventButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Нерегулярное событие", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        button.titleLabel?.textColor = .trackerWhite
+        button.backgroundColor = .trackerBlack
+        button.layer.cornerRadius = 16
+        button.addTarget(self, action: #selector(newEventPressed), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
 
     // MARK: - Public Methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .trackerWhite
-        setupNewHabitButton()
-        setupNewEventButton()
+        configureView()
     }
 
     // MARK: - IBAction
     @objc
     private func newHabitPressed() {
         let vc = NewHabitCreationViewController()
+        vc.closeCreatingTrackerViewController = { [weak self] in
+            guard let self = self else {return}
+            self.dismiss(animated: true)
+        }
+        _ = UINavigationController(rootViewController: vc)
         vc.creationDelegate = delegate
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -41,40 +66,28 @@ final class NewTrackerViewController: UIViewController {
     @objc
     private func newEventPressed() {
         let vc = NewEventCreationViewController()
+        vc.closeCreatingTrackerViewController = { [weak self] in
+            guard let self = self else {return}
+            self.dismiss(animated: true)
+        }
+        let navigationController = UINavigationController(rootViewController: vc)
         vc.creationDelegate = delegate
-        self.navigationController?.pushViewController(vc, animated: true)
+        present(navigationController, animated: true)
     }
 
-    // MARK: - Private Methods
-    private func setupNewHabitButton() {
-        newHabitButton.setTitle("Привычка", for: .normal)
-        newHabitButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        newHabitButton.titleLabel?.textColor = .trackerWhite
-        newHabitButton.backgroundColor = .trackerBlack
-        newHabitButton.layer.cornerRadius = 16
-        newHabitButton.addTarget(self, action: #selector(newHabitPressed), for: .touchUpInside)
-        newHabitButton.translatesAutoresizingMaskIntoConstraints = false
+    // MARK: - ViewConfigurable Methods
+    func addSubviews() {
         view.addSubview(newHabitButton)
+        view.addSubview(newEventButton)
+    }
 
+    func addConstraints() {
         NSLayoutConstraint.activate([
             newHabitButton.heightAnchor.constraint(equalToConstant: 60),
             newHabitButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             newHabitButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            newHabitButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-    }
+            newHabitButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
 
-    private func setupNewEventButton() {
-        newEventButton.setTitle("Нерегулярное событие", for: .normal)
-        newEventButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        newEventButton.titleLabel?.textColor = .trackerWhite
-        newEventButton.backgroundColor = .trackerBlack
-        newEventButton.layer.cornerRadius = 16
-        newEventButton.addTarget(self, action: #selector(newEventPressed), for: .touchUpInside)
-        newEventButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(newEventButton)
-
-        NSLayoutConstraint.activate([
             newEventButton.heightAnchor.constraint(equalToConstant: 60),
             newEventButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             newEventButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
