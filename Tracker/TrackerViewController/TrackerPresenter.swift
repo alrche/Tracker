@@ -8,7 +8,6 @@
 import Foundation
 
 final class TrackerPresenter {
-    // MARK: - Public Properties
     weak var viewController: TrackerViewController?
 
     var categories: [TrackerCategory] = []
@@ -137,7 +136,7 @@ final class TrackerPresenter {
             NotificationCenter.default.post(name: .dataDidChange, object: nil)
         }
         let vc = EditingTrackerViewController(viewModel: viewModel)
-        viewController?.present(vc, animated: true)
+        viewController?.presentViewController(vc: vc)
     }
 
     func datePickerWasChanged(date: Date) {
@@ -158,7 +157,7 @@ final class TrackerPresenter {
             self.viewController?.placeHolder?.setupNoSearchResultsState()
             self.updateMainScreen()
         }
-        viewController?.present(vc, animated: true)
+        viewController?.presentViewController(vc: vc)
     }
 
     func filterIsActive() -> Bool {
@@ -186,6 +185,7 @@ final class TrackerPresenter {
             if trackers.count > 0 {
                 currentCategories.append(TrackerCategory(title: title, trackers: trackers))
             }
+            viewController?.updateCollectionView()
         }
     }
 
@@ -299,21 +299,26 @@ extension TrackerPresenter: TrackerRecordStoreDelegate {
 extension TrackerPresenter: CreationTrackerDelegate {
     func createTracker(tracker: Tracker, category: String) {
         try? trackerStore.addNewTracker(tracker: tracker, forCategory: category)
+        updateMainScreen()
     }
 }
 
 //MARK: - TrackerCounterDelegate
 extension TrackerPresenter: TrackerCounterDelegate {
-    func calculateTimesTrackerWasCompleted(id trackerId: UUID) -> Int {
+    func calculateTimesTrackerWasCompleted(id: UUID) -> Int {
         let contains = completedTrackers.filter {
-            $0.id == trackerId
+            $0.id == id
         }
         return contains.count
     }
 
-    func checkIfTrackerWasCompletedAtCurrentDay(id trackerId: UUID, date: Date) -> Bool {
+    func checkIfTrackerWasCompletedAtCurrentDay(id: UUID, date: Date) -> Bool {
         let contains = completedTrackers.filter {
-            ($0.id == trackerId && Calendar.current.isDate($0.date, equalTo: currentDate, toGranularity: .day))
+            $0.id == id && Calendar.current.isDate(
+                $0.date,
+                equalTo: currentDate,
+                toGranularity: .day
+            )
         }.count > 0
         return contains
     }

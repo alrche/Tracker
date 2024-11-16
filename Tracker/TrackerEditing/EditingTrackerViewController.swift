@@ -30,6 +30,9 @@ final class EditingTrackerViewController: UIViewController {
         let button = UIButton()
         button.setTitle(NSLocalizedString("save", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        button.setTitleColor(UIColor { traitCollection in
+                    return traitCollection.userInterfaceStyle == .dark ? .trackerWhite : .trackerBlack
+                }, for: .normal)
         button.layer.cornerRadius = 16
         return button
     }()
@@ -38,13 +41,13 @@ final class EditingTrackerViewController: UIViewController {
         let button = UIButton()
         button.setTitle(NSLocalizedString("cancel", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        button.setTitleColor(.trackerRed, for: .normal)
         button.clipsToBounds = true
-        button.setTitleColor(#colorLiteral(red: 0.9607843137, green: 0.4196078431, blue: 0.4235294118, alpha: 1), for: .normal)
         button.layer.masksToBounds = true
         button.layer.cornerRadius = 16
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.trackerRed.cgColor
-        button.backgroundColor = .trackerBackground
+        button.layer.backgroundColor = UIColor.trackerWhite.cgColor
         return button
     }()
 
@@ -62,11 +65,11 @@ final class EditingTrackerViewController: UIViewController {
         super.viewDidLoad()
 
         self.title = NSLocalizedString("habit.edit", comment: "")
-        view.backgroundColor = .trackerBackground
+        view.backgroundColor = .trackerWhite
         navigationItem.hidesBackButton = true
 
-        setUpLabel()
-        setUpStackViewWithButtons()
+        setupLabel()
+        setupStackViewWithButtons()
         initCollection()
 
         viewModel.trackerInfoBinding = { [weak self] _ in
@@ -143,7 +146,7 @@ final class EditingTrackerViewController: UIViewController {
         }
     }
 
-    private func setUpLabel() {
+    private func setupLabel() {
         view.addSubview(daysCountLabel)
         daysCountLabel.text = viewModel.getDaysCountLabelText()
 
@@ -155,7 +158,7 @@ final class EditingTrackerViewController: UIViewController {
         ])
     }
 
-    func setUpStackViewWithButtons() {
+    func setupStackViewWithButtons() {
         saveButton.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
 

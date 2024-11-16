@@ -23,6 +23,9 @@ final class CategoryViewController: UIViewController, ViewConfigurable {
         let button = UIButton()
         button.setTitle(NSLocalizedString("category.add", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        button.setTitleColor(UIColor { traitCollection in
+            return traitCollection.userInterfaceStyle == .dark ? .trackerWhite : .trackerBlack
+        }, for: .normal)
         button.backgroundColor = .trackerBlack
         button.layer.cornerRadius = 16
         button.addTarget(self, action: #selector(createCategoryButtonTapped), for: .touchUpInside)

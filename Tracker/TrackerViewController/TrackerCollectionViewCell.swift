@@ -45,7 +45,7 @@ final class TrackerCollectionViewCell: UICollectionViewCell {
 
     private let appMetricaService = AppMetricaService()
 
-    private let addButton = UIButton(type: .custom)
+    private let addButton = UIButton(type: .system)
     private let card = UIView()
     private let circle = UIView()
     private let emojiLabel = UILabel()
@@ -64,6 +64,7 @@ final class TrackerCollectionViewCell: UICollectionViewCell {
         setupCircle()
 
         setupEmojiLabel()
+        setupPinImageView()
         setupTitle()
         setupAddButton()
         setupDaysCountLabel()

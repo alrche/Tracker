@@ -21,7 +21,7 @@ final class FiltersTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
-        backgroundColor = .trackerLightGrey
+        backgroundColor = .trackerBackground
         separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         layer.maskedCorners = []
 

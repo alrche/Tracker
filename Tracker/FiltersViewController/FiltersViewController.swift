@@ -26,9 +26,9 @@ final class FiltersViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .trackerWhite
         self.title = NSLocalizedString("filters", comment: "")
         navigationItem.hidesBackButton = true
-        view.backgroundColor = .trackerBackground
 
         initTableView()
     }

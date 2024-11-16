@@ -16,7 +16,12 @@ final class TabBarController: UITabBarController {
     private func generateTabBar() {
         let navigationViewController = UINavigationController(rootViewController: TrackerViewController())
         let statisticNavigationController = UINavigationController(rootViewController: StatisticViewController())
-        tabBar.layer.borderColor = UIColor.trackerGray.cgColor
+        tabBar.backgroundColor = .trackerWhite
+        if traitCollection.userInterfaceStyle == .light {
+            tabBar.layer.borderColor = UIColor.trackerGray.cgColor
+        } else {
+            tabBar.layer.borderColor = UIColor.trackerWhite.cgColor
+        }
         tabBar.layer.borderWidth = 1
         tabBar.tintColor = .trackerBlue
         tabBar.unselectedItemTintColor = .trackerGray

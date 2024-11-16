@@ -54,17 +54,10 @@ class CreationTrackerViewController: UIViewController {
 
     var saveButtonCanBePressed: Bool? {
         didSet {
-            switch saveButtonCanBePressed {
-            case true:
-                saveButton.backgroundColor = .trackerBlack
-                saveButton.isEnabled = true
-            case false:
-                saveButton.backgroundColor = .trackerGray
-                saveButton.isEnabled = false
-            default:
-                saveButton.backgroundColor = .trackerGray
-                saveButton.isEnabled = false
-            }
+            let isEnabled = saveButtonCanBePressed ?? false
+            saveButton.backgroundColor = isEnabled ? .trackerBlack : .trackerGray
+            saveButton.setTitleColor(isEnabled ? .trackerWhite : .white, for: .normal)
+            saveButton.isEnabled = isEnabled
         }
     }
 
@@ -129,7 +122,7 @@ class CreationTrackerViewController: UIViewController {
     private func setupSaveButton() {
         saveButton.setTitle(NSLocalizedString("save", comment: ""), for: .normal)
         saveButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        saveButton.titleLabel?.textColor = .trackerWhite
+        saveButton.setTitleColor(.white, for: .normal)
         saveButton.backgroundColor = .trackerGray
         saveButton.layer.cornerRadius = 16
         saveButton.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
@@ -258,10 +251,10 @@ extension CreationTrackerViewController: UICollectionViewDataSource {
                 for: indexPath
             ) as? HeaderCollectionReusableView {
                 if indexPath.section == Sections.emoji.rawValue {
-                    sectionHeader.titleLabel.text = "Emoji"
+                    sectionHeader.titleLabel.text = NSLocalizedString("emoji", comment: "")
                     return sectionHeader
                 } else if indexPath.section == Sections.color.rawValue {
-                    sectionHeader.titleLabel.text = "Цвет"
+                    sectionHeader.titleLabel.text = NSLocalizedString("color", comment: "")
                     return sectionHeader
                 }
             }

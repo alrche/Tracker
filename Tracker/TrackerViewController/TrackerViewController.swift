@@ -65,13 +65,11 @@ final class TrackerViewController: UIViewController, ViewConfigurable {
         return button
     }()
 
-    // MARK: - Core Data Stores
-    private let trackerStore = TrackerStore()
+    // MARK: - Core Data Store
     private let trackerCategoryStore = TrackerCategoryStore()
-    private let trackerRecordStore = TrackerRecordStore()
 
     // MARK: - Private Properties
-    private let presenter = TrackerPresenter()
+    private var presenter = TrackerPresenter()
     private let searchController = UISearchController(searchResultsController: nil)
 
     // MARK: - VC methods
@@ -81,13 +79,14 @@ final class TrackerViewController: UIViewController, ViewConfigurable {
     }
 
     override func viewDidDisappear(_ animated: Bool) {
-        presenter.reportToAppMetricaService(event: .close, params: ["screen" : "Main"])
         super.viewDidDisappear(animated)
+        presenter.reportToAppMetricaService(event: .close, params: ["screen" : "Main"])
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .trackerWhite
+        presenter.viewController = self
         setupView()
     }
 
@@ -96,9 +95,9 @@ final class TrackerViewController: UIViewController, ViewConfigurable {
         presenter.reportToAppMetricaService(event: .click, params: ["screen" : "Main", "item" : "add_track"])
         let createTrackerViewController = NewTrackerViewController()
         createTrackerViewController.delegate = presenter
-        let ncCreateTracker = UINavigationController(rootViewController: createTrackerViewController)
+        let createTracker = UINavigationController(rootViewController: createTrackerViewController)
 
-        navigationController?.present(ncCreateTracker, animated: true)
+        navigationController?.present(createTracker, animated: true)
     }
 
 
@@ -119,8 +118,8 @@ final class TrackerViewController: UIViewController, ViewConfigurable {
         setupNavigationBar()
         setupCollectionView()
         configureView()
-
         setupFilterButton()
+
         presenter.updateMainScreen()
     }
 
@@ -372,7 +371,7 @@ extension TrackerViewController: UISearchResultsUpdating {
 //MARK: TrackerSearchBarDelegate
 extension TrackerViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = ""
+        searchController.searchBar.text = ""
         presenter.updateMainScreen()
     }
 }

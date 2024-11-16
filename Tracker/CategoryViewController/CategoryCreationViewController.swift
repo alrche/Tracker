@@ -13,6 +13,7 @@ final class CategoryCreationViewController: UIViewController, ViewConfigurable {
         didSet {
             let isEnabled = saveButtonCanBePressed ?? false
             saveButton.backgroundColor = isEnabled ? .trackerBlack : .trackerGray
+            saveButton.setTitleColor(isEnabled ? .trackerWhite : .white, for: .normal)
             saveButton.isEnabled = isEnabled
         }
     }
@@ -21,7 +22,7 @@ final class CategoryCreationViewController: UIViewController, ViewConfigurable {
         let button = UIButton()
         button.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        button.titleLabel?.textColor = .trackerWhite
+        button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .trackerGray
         button.layer.cornerRadius = 16
         button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)

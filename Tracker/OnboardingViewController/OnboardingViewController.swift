@@ -35,8 +35,8 @@ final class OnboardingViewController: UIPageViewController, ViewConfigurable {
         let button = UIButton()
         button.setTitle(NSLocalizedString("onboarding.button", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        button.titleLabel?.textColor = .trackerWhite
-        button.backgroundColor = .trackerBlack
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .black
         button.layer.cornerRadius = 16
         button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
