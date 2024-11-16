@@ -29,6 +29,8 @@ final class ButtonsCell: UICollectionViewCell, UITableViewDataSource, UITableVie
 
     var state: State?
     var tableView = UITableView()
+    var scheduleSubText: String?
+    var categorySubText: String?
 
     // MARK: - Initializers
     override init(frame: CGRect) {

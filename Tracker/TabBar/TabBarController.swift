@@ -15,17 +15,18 @@ final class TabBarController: UITabBarController {
 
     private func generateTabBar() {
         let navigationViewController = UINavigationController(rootViewController: TrackerViewController())
+        let statisticNavigationController = UINavigationController(rootViewController: StatisticViewController())
         tabBar.layer.borderColor = UIColor.trackerGray.cgColor
         tabBar.layer.borderWidth = 1
         tabBar.tintColor = .trackerBlue
         tabBar.unselectedItemTintColor = .trackerGray
         viewControllers = [
             generateVC(viewController: navigationViewController,
-                       title: "Трекеры",
+                       title: NSLocalizedString("trackers", comment: ""),
                        image: UIImage(named: "tracker_icon")
                       ),
-            generateVC(viewController: StatisticViewController(),
-                       title: "Статистика",
+            generateVC(viewController: statisticNavigationController,
+                       title: NSLocalizedString("statistics", comment: ""),
                        image: UIImage(named: "statistic_icon")
                       )
         ]
