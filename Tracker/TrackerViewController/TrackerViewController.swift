@@ -166,6 +166,7 @@ final class TrackerViewController: UIViewController, ViewConfigurable {
 
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
+        searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.placeholder = NSLocalizedString("placeholder.searchbar", comment: "")
         navigationItem.searchController = searchController
     }
