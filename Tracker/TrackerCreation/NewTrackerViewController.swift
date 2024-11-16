@@ -20,7 +20,7 @@ final class NewTrackerViewController: UIViewController, ViewConfigurable {
 
     private lazy var newHabitButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Привычка", for: .normal)
+        button.setTitle(NSLocalizedString("habit", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         button.titleLabel?.textColor = .trackerWhite
         button.backgroundColor = .trackerBlack
@@ -32,7 +32,7 @@ final class NewTrackerViewController: UIViewController, ViewConfigurable {
 
     private lazy var newEventButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Нерегулярное событие", for: .normal)
+        button.setTitle(NSLocalizedString("event", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         button.titleLabel?.textColor = .trackerWhite
         button.backgroundColor = .trackerBlack
@@ -46,6 +46,7 @@ final class NewTrackerViewController: UIViewController, ViewConfigurable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.title = NSLocalizedString("chooseTrackerVC.title", comment: "")
         view.backgroundColor = .trackerWhite
         configureView()
     }

@@ -52,6 +52,16 @@ final class EmojiCell: UICollectionViewCell {
         addConstraints()
     }
 
+    // MARK: - Public Methods
+    func setEmoji(with string: String) {
+        emojiLabel.text = string
+    }
+
+    func getEmoji() -> String {
+        guard let text = emojiLabel.text else { return String() }
+        return text
+    }
+
     // MARK: - Private Methods
     private func updateBorder() {
         self.backgroundColor = self.isSelected ? .trackerLightGrey : .clear

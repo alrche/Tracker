@@ -1,12 +1,6 @@
 # ignore Pods
 /Pods
 
-# ignore Podfile.lock
-Podfile.lock
-
-# ignore Tracker.xcworkspace
-Tracker.xcworkspace
-
 # Created by https://www.toptal.com/developers/gitignore/api/swift,xcode
 # Edit at https://www.toptal.com/developers/gitignore?templates=swift,xcode
 

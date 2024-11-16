@@ -7,11 +7,6 @@
 
 import UIKit
 
-private enum Sections: Int, CaseIterable {
-    case category = 0
-    case schedule
-}
-
 protocol ShowScheduleDelegate: AnyObject {
     func showShowScheduleViewController(viewController: ScheduleViewController)
 }
@@ -73,14 +68,16 @@ final class ButtonsCell: UICollectionViewCell, UITableViewDataSource, UITableVie
         guard let state = state else { return }
         if state == .habit {
             switch indexPath.row {
-            case Sections.category.rawValue:
+            case TypeSections.category.rawValue:
                 cell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
                 cell.backgroundColor = .trackerBackground
-                cell.titleLabel.text = "Категории"
-            case Sections.schedule.rawValue:
+                cell.setTitleLabelText(with: "categories")
+                cell.accessibilityIdentifier = "CategoryCell"
+            case TypeSections.schedule.rawValue:
                 cell.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
                 cell.backgroundColor = .trackerBackground
-                cell.titleLabel.text = "Расписание"
+                cell.setTitleLabelText(with: "schedule")
+                cell.accessibilityIdentifier = "ScheduleCell"
                 cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: tableView.bounds.width)
             default:
                 return
@@ -88,7 +85,7 @@ final class ButtonsCell: UICollectionViewCell, UITableViewDataSource, UITableVie
         } else {
             cell.layer.masksToBounds = true
             cell.backgroundColor = .trackerBackground
-            cell.titleLabel.text = "Категории"
+            cell.setTitleLabelText(with: "categories")
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: tableView.bounds.width)
         }
     }
@@ -98,9 +95,9 @@ final class ButtonsCell: UICollectionViewCell, UITableViewDataSource, UITableVie
 extension ButtonsCell {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if state == .habit {
-            return 2
+            return CellSize.two
         } else {
-            return 1
+            return CellSize.one
         }
     }
 
@@ -115,18 +112,18 @@ extension ButtonsCell {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return CellSize.one
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 75
+        return CellSize.seventyFive
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.row == Sections.category.rawValue {
+        if indexPath.row == TypeSections.category.rawValue {
             categoriesDelegate?.showCategoriesViewController(viewController: CategoryViewController())
-        } else if indexPath.row == Sections.schedule.rawValue {
+        } else if indexPath.row == TypeSections.schedule.rawValue {
             scheduleDelegate?.showShowScheduleViewController(viewController: ScheduleViewController())
         }
     }
