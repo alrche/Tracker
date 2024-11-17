@@ -34,7 +34,6 @@ final class TrackerPresenter {
     private var trackerStore = TrackerStore()
     private var trackerCategoryStore = TrackerCategoryStore()
     private var trackerRecordStore = TrackerRecordStore()
-    private let appMetricaService = AppMetricaService()
     private let userDefaults = UserDefaults.standard
 
     // MARK: - Initializers
