@@ -92,7 +92,7 @@ final class TrackerPresenter {
 
 
     func reportToAppMetricaService(event: AppMetricaEvent, params : [AnyHashable : Any]) {
-        appMetricaService.report(event: event, params: params)
+        AppMetricaService.report(event: event, params: params)
     }
 
     func deleteTracker(tracker: Tracker) {

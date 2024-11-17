@@ -285,7 +285,7 @@ extension TrackerViewController: UICollectionViewDataSource {
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        if searchController.isActive {
+        if searchController.isActive || presenter.filterIsActive() {
             if presenter.noSearchResults() {
                 showSearchPlaceHolder()
             } else {

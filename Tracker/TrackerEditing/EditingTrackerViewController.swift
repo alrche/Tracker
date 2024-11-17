@@ -30,9 +30,7 @@ final class EditingTrackerViewController: UIViewController {
         let button = UIButton()
         button.setTitle(NSLocalizedString("save", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        button.setTitleColor(UIColor { traitCollection in
-                    return traitCollection.userInterfaceStyle == .dark ? .trackerWhite : .trackerBlack
-                }, for: .normal)
+        button.setTitleColor(.trackerWhite, for: .normal)
         button.layer.cornerRadius = 16
         return button
     }()

@@ -43,15 +43,13 @@ final class TrackerCollectionViewCell: UICollectionViewCell {
         }
     }
 
-    private let appMetricaService = AppMetricaService()
-
-    private let addButton = UIButton(type: .system)
-    private let card = UIView()
-    private let circle = UIView()
-    private let emojiLabel = UILabel()
-    private let titleLabel = UILabel()
-    private let pinImageView = UIImageView()
-    private let daysCountLabel = UILabel()
+    private lazy var addButton = UIButton(type: .system)
+    private lazy var card = UIView()
+    private lazy var circle = UIView()
+    private lazy var emojiLabel = UILabel()
+    private lazy var titleLabel = UILabel()
+    private lazy var pinImageView = UIImageView()
+    private lazy var daysCountLabel = UILabel()
 
     // MARK: - Initializers
     override init(frame: CGRect) {
@@ -82,7 +80,7 @@ final class TrackerCollectionViewCell: UICollectionViewCell {
     // MARK: - IBAction
     @objc
     func buttonClicked() {
-        appMetricaService.report(event: .click, params: ["screen" : "Main", "item" : "track"])
+        AppMetricaService.report(event: .click, params: ["screen" : "Main", "item" : "track"])
         if !checkIfTrackerWasCompleted() {
             guard let id = trackerInfo?.id, let currentDay = trackerInfo?.currentDay
             else { return }
