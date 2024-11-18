@@ -50,6 +50,10 @@ final class ButtonTableViewCell: UITableViewCell {
         }
     }
 
+    func setTitleLabelText(with string: String) {
+        titleLabel.text = NSLocalizedString("\(string)", comment: "")
+    }
+
     // MARK: - Private Methods
     private func setupTitleLabel() {
         titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)

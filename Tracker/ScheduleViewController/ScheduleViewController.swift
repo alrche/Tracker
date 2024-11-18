@@ -35,7 +35,8 @@ final class ScheduleViewController: UIViewController, ViewConfigurable {
     }()
     private lazy var saveButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Готово", for: .normal)
+        button.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
+        button.setTitleColor(.trackerWhite, for: .normal)
         button.backgroundColor = .trackerBlack
         button.layer.cornerRadius = 16
         button.addTarget(self, action: #selector(didTapSaveButton), for: .touchUpInside)
@@ -51,7 +52,7 @@ final class ScheduleViewController: UIViewController, ViewConfigurable {
         scheduleTableView.dataSource = self
         configureView()
 
-        self.title = "Расписание"
+        self.title = NSLocalizedString("schedule", comment: "")
         navigationItem.hidesBackButton = true
         view.backgroundColor = .trackerWhite
     }

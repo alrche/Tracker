@@ -27,26 +27,26 @@ final class PlaceHolderView: UIView {
 
     func setupNoTrackersState() {
         imageView.image = UIImage(named: "tracker_placeholder")
-        label.text = "Что будем отслеживать?"
+        label.text = NSLocalizedString("placeholder.noTrackers", comment: "")
         label.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         label.textAlignment = .center
     }
 
     func setupNoSearchResultsState() {
         imageView.image = UIImage(named: "tracker_not_found")
-        label.text = "Ничего не найдено"
+        label.text = NSLocalizedString("placeholder.noSearchResults", comment: "")
         label.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         label.textAlignment = .center
     }
 
     func setupNoStatisticState() {
         imageView.image = UIImage(named: "statistic_placeholder")
-        label.text = "Анализировать пока нечего"
+        label.text = NSLocalizedString("placeholder.noStatistics", comment: "")
         label.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         label.textAlignment = .center
     }
 
-    func setUpNoCategories() {
+    func setupNoCategories() {
         let image = UIImage(named: "tracker_placeholder")
         imageView.image = image
 
@@ -54,7 +54,7 @@ final class PlaceHolderView: UIView {
         paragraphStyle.lineSpacing = 18 - UIFont.systemFont(ofSize: 12, weight: .medium).lineHeight
 
         let attributedText = NSAttributedString(
-            string: "Привычки и события можно \n объединить по смыслу",
+            string: NSLocalizedString("placeholder.noCategories", comment: ""),
             attributes: [
                 .font: UIFont.systemFont(ofSize: 12, weight: .medium),
                 .paragraphStyle: paragraphStyle

@@ -13,15 +13,16 @@ final class CategoryCreationViewController: UIViewController, ViewConfigurable {
         didSet {
             let isEnabled = saveButtonCanBePressed ?? false
             saveButton.backgroundColor = isEnabled ? .trackerBlack : .trackerGray
+            saveButton.setTitleColor(isEnabled ? .trackerWhite : .white, for: .normal)
             saveButton.isEnabled = isEnabled
         }
     }
 
     private lazy var saveButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Готово", for: .normal)
+        button.setTitle(NSLocalizedString("done", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        button.titleLabel?.textColor = .trackerWhite
+        button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .trackerGray
         button.layer.cornerRadius = 16
         button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
@@ -33,7 +34,7 @@ final class CategoryCreationViewController: UIViewController, ViewConfigurable {
         let textField = UITextField()
         textField.layer.cornerRadius = 16
         textField.backgroundColor = .trackerBackground
-        textField.placeholder = "Введите название категории"
+        textField.placeholder = NSLocalizedString("category.enterTitle", comment: "")
         textField.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         textField.setLeftPaddingPoints(12)
         textField.clearButtonMode = .whileEditing
@@ -48,7 +49,7 @@ final class CategoryCreationViewController: UIViewController, ViewConfigurable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Новая категория"
+        self.title = NSLocalizedString("category.new", comment: "")
         navigationItem.hidesBackButton = true
         view.backgroundColor = .trackerWhite
 

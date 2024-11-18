@@ -11,11 +11,11 @@ final class OnboardingViewController: UIPageViewController, ViewConfigurable {
     
     lazy var pages: [UIViewController] = {
         let blue = SinglePageOnboardingViewController (
-            text: "Отслеживайте только то, что хотите",
+            text: NSLocalizedString("onboarding.first", comment: ""),
             imageTitle: "onb_page1"
         )
         let red = SinglePageOnboardingViewController(
-            text: "Даже если это не литры воды и йога",
+            text: NSLocalizedString("onboarding.second", comment: ""),
             imageTitle: "onb_page2"
         )
         return [blue, red]
@@ -33,10 +33,10 @@ final class OnboardingViewController: UIPageViewController, ViewConfigurable {
     
     private lazy var onboardingButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Вот это технологии!", for: .normal)
+        button.setTitle(NSLocalizedString("onboarding.button", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        button.titleLabel?.textColor = .trackerWhite
-        button.backgroundColor = .trackerBlack
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .black
         button.layer.cornerRadius = 16
         button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false

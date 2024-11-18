@@ -15,13 +15,6 @@ struct CreationTrackerViewControllerPreview: PreviewProvider {
     }
 }
 
-private enum Sections: Int, CaseIterable {
-    case name = 0
-    case buttons
-    case emoji
-    case color
-}
-
 class CreationTrackerViewController: UIViewController {
 
     weak var creationDelegate: CreationTrackerDelegate?
@@ -61,17 +54,10 @@ class CreationTrackerViewController: UIViewController {
 
     var saveButtonCanBePressed: Bool? {
         didSet {
-            switch saveButtonCanBePressed {
-            case true:
-                saveButton.backgroundColor = .trackerBlack
-                saveButton.isEnabled = true
-            case false:
-                saveButton.backgroundColor = .trackerGray
-                saveButton.isEnabled = false
-            default:
-                saveButton.backgroundColor = .trackerGray
-                saveButton.isEnabled = false
-            }
+            let isEnabled = saveButtonCanBePressed ?? false
+            saveButton.backgroundColor = isEnabled ? .trackerBlack : .trackerGray
+            saveButton.setTitleColor(isEnabled ? .trackerWhite : .white, for: .normal)
+            saveButton.isEnabled = isEnabled
         }
     }
 
@@ -84,20 +70,14 @@ class CreationTrackerViewController: UIViewController {
     private let stackView = UIStackView()
     private let saveButton = UIButton()
     private let cancelButton = UIButton()
-    private let allEmojies = [ "🙂", "😻", "🌺", "🐶", "❤️", "😱",
-                               "😇", "😡", "🥶", "🤔", "🙌", "🍔",
-                               "🥦", "🏓", "🥇", "🎸", "🏝️", "😪"]
-    private let allColors = [UIColor.selection1, .selection2, .selection3,
-                             .selection4, .selection5, .selection6,
-                             .selection7, .selection8, .selection9,
-                             .selection10, .selection11, .selection12,
-                             .selection13, .selection14, .selection15,
-                             .selection16, .selection17, .selection18]
+    private let allEmojies = ColorsEmojies.allEmojies
+    private let allColors = ColorsEmojies.allColors
 
     // MARK: - Public Methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.backgroundColor = .trackerBackground
         setupStackView()
         setupCollectionView()
 
@@ -128,7 +108,8 @@ class CreationTrackerViewController: UIViewController {
             name: name,
             color: color,
             emoji: emoji,
-            schedule: selectedWeekDays
+            schedule: selectedWeekDays,
+            isPinned: false
         )
 
         creationDelegate?.createTracker(tracker: tracker, category: categoryTitle)
@@ -139,7 +120,9 @@ class CreationTrackerViewController: UIViewController {
     // MARK: - Private Methods
 
     private func setupSaveButton() {
-        saveButton.setTitle("Создать", for: .normal)
+        saveButton.setTitle(NSLocalizedString("save", comment: ""), for: .normal)
+        saveButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        saveButton.setTitleColor(.white, for: .normal)
         saveButton.backgroundColor = .trackerGray
         saveButton.layer.cornerRadius = 16
         saveButton.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
@@ -152,7 +135,7 @@ class CreationTrackerViewController: UIViewController {
     }
 
     private func setupCancelButton() {
-        cancelButton.setTitle("Отменить", for: .normal)
+        cancelButton.setTitle(NSLocalizedString("cancel", comment: ""), for: .normal)
         cancelButton.clipsToBounds = true
         cancelButton.setTitleColor(.trackerRed, for: .normal)
         cancelButton.layer.cornerRadius = 16
@@ -268,10 +251,10 @@ extension CreationTrackerViewController: UICollectionViewDataSource {
                 for: indexPath
             ) as? HeaderCollectionReusableView {
                 if indexPath.section == Sections.emoji.rawValue {
-                    sectionHeader.titleLabel.text = "Emoji"
+                    sectionHeader.titleLabel.text = NSLocalizedString("emoji", comment: "")
                     return sectionHeader
                 } else if indexPath.section == Sections.color.rawValue {
-                    sectionHeader.titleLabel.text = "Цвет"
+                    sectionHeader.titleLabel.text = NSLocalizedString("color", comment: "")
                     return sectionHeader
                 }
             }

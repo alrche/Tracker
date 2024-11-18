@@ -20,9 +20,9 @@ final class NewTrackerViewController: UIViewController, ViewConfigurable {
 
     private lazy var newHabitButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Привычка", for: .normal)
+        button.setTitle(NSLocalizedString("habit", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        button.titleLabel?.textColor = .trackerWhite
+        button.setTitleColor(.trackerWhite, for: .normal)
         button.backgroundColor = .trackerBlack
         button.layer.cornerRadius = 16
         button.addTarget(self, action: #selector(newHabitPressed), for: .touchUpInside)
@@ -32,9 +32,9 @@ final class NewTrackerViewController: UIViewController, ViewConfigurable {
 
     private lazy var newEventButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Нерегулярное событие", for: .normal)
+        button.setTitle(NSLocalizedString("event", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        button.titleLabel?.textColor = .trackerWhite
+        button.setTitleColor(.trackerWhite, for: .normal)
         button.backgroundColor = .trackerBlack
         button.layer.cornerRadius = 16
         button.addTarget(self, action: #selector(newEventPressed), for: .touchUpInside)
@@ -46,6 +46,7 @@ final class NewTrackerViewController: UIViewController, ViewConfigurable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.title = NSLocalizedString("chooseTrackerVC.title", comment: "")
         view.backgroundColor = .trackerWhite
         configureView()
     }
@@ -70,9 +71,9 @@ final class NewTrackerViewController: UIViewController, ViewConfigurable {
             guard let self = self else {return}
             self.dismiss(animated: true)
         }
-        let navigationController = UINavigationController(rootViewController: vc)
+        _ = UINavigationController(rootViewController: vc)
         vc.creationDelegate = delegate
-        present(navigationController, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
     // MARK: - ViewConfigurable Methods

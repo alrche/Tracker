@@ -54,6 +54,16 @@ final class ColorCell: UICollectionViewCell, ViewConfigurable {
         addConstraints()
     }
 
+    // MARK: - Public Methods
+    func setColor(with color: UIColor) {
+        colorView.backgroundColor = color
+    }
+
+    func getColor() -> UIColor {
+        guard let color = colorView.backgroundColor else { return UIColor() }
+        return color
+    }
+
     // MARK: - Private Methods
     private func updateBorder() {
         layer.borderWidth = isSelected ? 3 : 0

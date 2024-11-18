@@ -21,8 +21,9 @@ final class CategoryViewController: UIViewController, ViewConfigurable {
 
     private lazy var createCategoryButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Добавить категорию", for: .normal)
+        button.setTitle(NSLocalizedString("category.add", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        button.setTitleColor(.trackerWhite, for: .normal)
         button.backgroundColor = .trackerBlack
         button.layer.cornerRadius = 16
         button.addTarget(self, action: #selector(createCategoryButtonTapped), for: .touchUpInside)
@@ -36,7 +37,7 @@ final class CategoryViewController: UIViewController, ViewConfigurable {
         categoryTableView.dataSource = self
         categoryTableView.delegate = self
 
-        self.title = "Категория"
+        self.title = NSLocalizedString("category", comment: "")
         navigationItem.hidesBackButton = true
         view.backgroundColor = .trackerWhite
 
@@ -74,9 +75,9 @@ final class CategoryViewController: UIViewController, ViewConfigurable {
         navigationController?.pushViewController(CategoryCreationViewController(), animated: true)
     }
 
-    private func showPlaceholder() {
+    private func showPlaceHolder() {
         let backgroundView = PlaceHolderView(frame: categoryTableView.frame)
-        backgroundView.setUpNoCategories()
+        backgroundView.setupNoCategories()
         categoryTableView.backgroundView = backgroundView
     }
 }
@@ -85,7 +86,7 @@ final class CategoryViewController: UIViewController, ViewConfigurable {
 extension CategoryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (categoriesViewModel.numberOfRows == 0) {
-            showPlaceholder()
+            showPlaceHolder()
         } else {
             tableView.backgroundView = nil
         }
